@@ -1,5 +1,3 @@
-import React from "react";
-import "../index.css";
 import closeIcon from "../images/close-icon.svg";
 
 function PopupWithForm(props) {
@@ -15,6 +13,9 @@ function PopupWithForm(props) {
 
           {props.children}
 
+          <button type="submit" className="popup__form-save-button">
+            {`${props.submitButtonText}`}
+          </button>
           <button
             type="button"
             className="popup__form-close-button"

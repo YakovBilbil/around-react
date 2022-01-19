@@ -4,9 +4,8 @@ import hourglass from "../images/hourglass.png";
 import pencil from "../images/pencil.png";
 import editButton from "../images/edit-button.png";
 
-import handleEditAvatarClick from "./handleEditAvatarClick";
-import handleEditProfileClick from "./handleEditProfileClick";
-import handleAddPlaceClick from "./handleAddPlaceClick";
+import handlePopupClick from "./handlePopupClick";
+import Button from "./Button";
 
 function Main() {
   return (
@@ -19,18 +18,13 @@ function Main() {
               src={hourglass}
               alt="Profile Avatar"
             />
-            <button
-              type="button"
-              className="profile__edit-avatar-button"
-              onClick={handleEditAvatarClick}
-            >
+            <Button name="edit-avatar" handleClick={handlePopupClick}>
               <img
                 className="profile__edit-avatar-button-pencil not-visible"
                 src={pencil}
                 alt="edit avatar button"
-                // onClick={handleEditAvatarClick} thats suppose to be here
               />
-            </button>
+            </Button>
           </div>
 
           <div className="profile__info">
@@ -40,27 +34,18 @@ function Main() {
             <p className="profile__value-type-profession">
               <GiSandsOfTime />
             </p>
-            <button
-              type="button"
-              className="profile__edit-button"
-              aria-label="Edit Profile"
-              onClick={handleEditProfileClick}
-            >
+            <Button name="edit-profile" handleClick={handlePopupClick}>
               <img
                 className="profile__edit-icon"
                 src={editButton}
                 alt="Edit Button"
               />
-            </button>
+            </Button>
           </div>
 
-          <button
-            type="button"
-            className="profile__add-button"
-            onClick={handleAddPlaceClick}
-          >
+          <Button name="add-card" handleClick={handlePopupClick}>
             &#43;
-          </button>
+          </Button>
         </section>
 
         <section className="cards">

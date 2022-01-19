@@ -14,7 +14,11 @@ function App() {
           <Footer />
         </div>
 
-        <PopupWithForm title="Edit profile" name="edit-profile">
+        <PopupWithForm
+          title="Edit profile"
+          name="edit-profile"
+          submitButtonText="Save"
+        >
           <input
             type="text"
             name="fullName"
@@ -40,12 +44,13 @@ function App() {
             className="popup__form-input-error"
             id="profession-input-error"
           ></p>
-          <button type="submit" className="popup__form-save-button">
-            Save
-          </button>
         </PopupWithForm>
 
-        <PopupWithForm title="New place" name="add-card">
+        <PopupWithForm
+          title="New place"
+          name="add-card"
+          submitButtonText="Create"
+        >
           <input
             type="text"
             name="name"
@@ -66,12 +71,13 @@ function App() {
             required
           />
           <p className="popup__form-input-error" id="url-input-error"></p>
-          <button type="submit" className="popup__form-save-button">
-            Create
-          </button>
         </PopupWithForm>
 
-        <PopupWithForm title="Change profile picture" name="edit-avatar">
+        <PopupWithForm
+          title="Change profile picture"
+          name="edit-avatar"
+          submitButtonText="Save"
+        >
           <input
             type="url"
             name="link"
@@ -84,9 +90,6 @@ function App() {
             className="popup__form-input-error"
             id="avatar-url-input-error"
           ></p>
-          <button type="submit" className="popup__form-save-button">
-            Save
-          </button>
         </PopupWithForm>
 
         <div className="popup popup_card-image">

@@ -1,4 +1,4 @@
-.profile__add-button {
+.profile__add-card-button {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0px;
@@ -19,13 +19,13 @@
     cursor: inherit;
 }
 
-.profile__add-button:hover {
+.profile__add-card-button:hover {
     opacity: 0.6;
     cursor: pointer;
 }
 
 @media screen and (max-width: 550px) {
-    .profile__add-button {
+    .profile__add-card-button {
         margin: 0px;
         width: 282px;
         font-size: 35px;
@@ -33,7 +33,7 @@
 }
 
 @media screen and (max-width: 320px) {
-    .profile__add-button {
+    .profile__add-card-button {
         width: 100%;
     }
 }
