@@ -2,7 +2,11 @@ import closeIcon from "../images/close-icon.svg";
 
 function PopupWithForm(props) {
   return (
-    <div className={`popup popup_${props.name}`}>
+    <div
+      className={`popup popup_${props.name} ${
+        props.isOpen ? "popup_opened" : ""
+      }`}
+    >
       <div className="popup__form">
         <form
           className="popup__form-submit"
@@ -20,6 +24,7 @@ function PopupWithForm(props) {
             type="button"
             className="popup__form-close-button"
             aria-label="Close"
+            onClick={props.onClose}
           >
             <img
               className="popup__close-icon"

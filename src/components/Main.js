@@ -4,10 +4,10 @@ import hourglass from "../images/hourglass.png";
 import pencil from "../images/pencil.png";
 import editButton from "../images/edit-button.png";
 
-import handlePopupClick from "./handlePopupClick";
+// import handlePopupClick from "./handlePopupClick";
 import Button from "./Button";
 
-function Main() {
+function Main(props) {
   return (
     <>
       <main className="content">
@@ -18,7 +18,7 @@ function Main() {
               src={hourglass}
               alt="Profile Avatar"
             />
-            <Button name="edit-avatar" handleClick={handlePopupClick}>
+            <Button name="edit-avatar" handleClick={props.onEditAvatarClick}>
               <img
                 className="profile__edit-avatar-button-pencil not-visible"
                 src={pencil}
@@ -34,7 +34,7 @@ function Main() {
             <p className="profile__value-type-profession">
               <GiSandsOfTime />
             </p>
-            <Button name="edit-profile" handleClick={handlePopupClick}>
+            <Button name="edit-profile" handleClick={props.onEditProfileClick}>
               <img
                 className="profile__edit-icon"
                 src={editButton}
@@ -43,7 +43,7 @@ function Main() {
             </Button>
           </div>
 
-          <Button name="add-card" handleClick={handlePopupClick}>
+          <Button name="add-card" handleClick={props.onAddPlaceClick}>
             &#43;
           </Button>
         </section>

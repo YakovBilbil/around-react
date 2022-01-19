@@ -1,3 +1,4 @@
+import React from "react";
 import Header from "./Header.js";
 import Main from "./Main.js";
 import Footer from "./Footer.js";
@@ -5,19 +6,87 @@ import closeIcon from "../images/close-icon.svg";
 import PopupWithForm from "./PopupWithForm";
 
 function App() {
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
+    React.useState(false);
+
+  function handleEditAvatarClick() {
+    setIsEditAvatarPopupOpen(true);
+  }
+
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
+    React.useState(false);
+
+  function handleEditProfileClick() {
+    setIsEditProfilePopupOpen(true);
+  }
+
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+
+  function handleAddPlaceClick() {
+    setIsAddPlacePopupOpen(true);
+  }
+
+  const [isVerifyCardDeletePopupOpen, setIsVerifyCardDeletePopupOpen] =
+    React.useState(false);
+  // maybe next we will have to assign this function to the on trash click
+  function handleVerifyCardDeleteClick() {
+    setIsVerifyCardDeletePopupOpen(true);
+  }
+
+  console.log({ isEditAvatarPopupOpen });
+  console.log({ isEditProfilePopupOpen });
+  console.log({ isAddPlacePopupOpen });
+  console.log({ isVerifyCardDeletePopupOpen });
+  console.log("");
+
+  function closeAllPopups() {
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsVerifyCardDeletePopupOpen(false);
+  }
+
   return (
     <>
       <div className="page">
         <div className="container">
           <Header />
-          <Main />
+          <Main
+            onEditAvatarClick={handleEditAvatarClick}
+            onEditProfileClick={handleEditProfileClick}
+            onAddPlaceClick={handleAddPlaceClick}
+            onCardClick=""
+          />
           <Footer />
         </div>
+
+        <PopupWithForm
+          title="Change profile picture"
+          name="edit-avatar"
+          submitButtonText="Save"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+        >
+          <input
+            type="url"
+            name="link"
+            id="avatar-url-input"
+            placeholder="Profile picture link"
+            className="popup__form-input popup__form-input_type_image-link"
+            required
+          />
+          <p
+            className="popup__form-input-error"
+            id="avatar-url-input-error"
+          ></p>
+        </PopupWithForm>
 
         <PopupWithForm
           title="Edit profile"
           name="edit-profile"
           submitButtonText="Save"
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
         >
           <input
             type="text"
@@ -50,6 +119,8 @@ function App() {
           title="New place"
           name="add-card"
           submitButtonText="Create"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
         >
           <input
             type="text"
@@ -74,23 +145,12 @@ function App() {
         </PopupWithForm>
 
         <PopupWithForm
-          title="Change profile picture"
-          name="edit-avatar"
-          submitButtonText="Save"
-        >
-          <input
-            type="url"
-            name="link"
-            id="avatar-url-input"
-            placeholder="Profile picture link"
-            className="popup__form-input popup__form-input_type_image-link"
-            required
-          />
-          <p
-            className="popup__form-input-error"
-            id="avatar-url-input-error"
-          ></p>
-        </PopupWithForm>
+          title="Are you sure?"
+          name="verify-card-delete"
+          submitButtonText="Yes"
+          isOpen={isVerifyCardDeletePopupOpen}
+          onClose={closeAllPopups}
+        />
 
         <div className="popup popup_card-image">
           <div className="popup__form popup__image">
@@ -107,31 +167,6 @@ function App() {
             </button>
             <img className="popup__image-photo" src="#" alt="#" />
             <p className="popup__image-title"></p>
-          </div>
-        </div>
-
-        <div className="popup popup_verify-card-delete">
-          <div className="popup__form">
-            <form className="popup__form-submit">
-              <h2 className="popup__form-title">Are you sure?</h2>
-              <button
-                type="submit"
-                className="popup__form-save-button popup__verify-delete-button"
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                className="popup__form-close-button"
-                aria-label="Close"
-              >
-                <img
-                  className="popup__close-icon"
-                  src={closeIcon}
-                  alt="Close Icon"
-                />
-              </button>
-            </form>
           </div>
         </div>
       </div>
@@ -297,3 +332,31 @@ export default App;
 
 
         */
+
+/*
+        <div className="popup popup_verify-card-delete">
+          <div className="popup__form">
+            <form className="popup__form-submit">
+              <h2 className="popup__form-title">Are you sure?</h2>
+              <button
+                type="submit"
+                className="popup__form-save-button popup__verify-delete-button"
+              >
+                Yes
+              </button>
+              <button
+                type="button"
+                className="popup__form-close-button"
+                aria-label="Close"
+              >
+                <img
+                  className="popup__close-icon"
+                  src={closeIcon}
+                  alt="Close Icon"
+                />
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+*/

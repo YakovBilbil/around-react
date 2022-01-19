@@ -3,7 +3,7 @@ function Button(props) {
     <button
       type="button"
       className={`profile__${props.name}-button`}
-      onClick={() => props.handleClick(`${props.name}`)}
+      onClick={props.handleClick}
     >
       {props.children}
     </button>
