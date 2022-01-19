@@ -1,7 +1,12 @@
 import { GiSandsOfTime } from "react-icons/gi";
+
 import hourglass from "../images/hourglass.png";
 import pencil from "../images/pencil.png";
 import editButton from "../images/edit-button.png";
+
+import handleEditAvatarClick from "./handleEditAvatarClick";
+import handleEditProfileClick from "./handleEditProfileClick";
+import handleAddPlaceClick from "./handleAddPlaceClick";
 
 function Main() {
   return (
@@ -14,14 +19,20 @@ function Main() {
               src={hourglass}
               alt="Profile Avatar"
             />
-            <button type="button" className="profile__edit-avatar-button">
+            <button
+              type="button"
+              className="profile__edit-avatar-button"
+              onClick={handleEditAvatarClick}
+            >
               <img
                 className="profile__edit-avatar-button-pencil not-visible"
                 src={pencil}
                 alt="edit avatar button"
+                // onClick={handleEditAvatarClick} thats suppose to be here
               />
             </button>
           </div>
+
           <div className="profile__info">
             <h1 className="profile__value-type-name">
               <GiSandsOfTime />
@@ -33,6 +44,7 @@ function Main() {
               type="button"
               className="profile__edit-button"
               aria-label="Edit Profile"
+              onClick={handleEditProfileClick}
             >
               <img
                 className="profile__edit-icon"
@@ -41,7 +53,12 @@ function Main() {
               />
             </button>
           </div>
-          <button type="button" className="profile__add-button">
+
+          <button
+            type="button"
+            className="profile__add-button"
+            onClick={handleAddPlaceClick}
+          >
             &#43;
           </button>
         </section>
