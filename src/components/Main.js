@@ -1,13 +1,32 @@
-import { GiSandsOfTime } from "react-icons/gi";
+import React from "react";
+import api from "../utils/Api";
 
-import hourglass from "../images/hourglass.png";
+//import { GiSandsOfTime } from "react-icons/gi";
+//import hourglass from "../images/hourglass.png";
 import pencil from "../images/pencil.png";
 import editButton from "../images/edit-button.png";
-
-// import handlePopupClick from "./handlePopupClick";
 import Button from "./Button";
 
 function Main(props) {
+  const [userName, setUserName] = React.useState();
+
+  const [userDescription, setUserDescription] = React.useState();
+
+  const [userAvatar, setUserAvatar] = React.useState();
+
+  React.useEffect(() => {
+    (async function () {
+      try {
+        const userData = await api.getUserData();
+        setUserAvatar(userData.avatar);
+        setUserName(userData.name);
+        setUserDescription(userData.about);
+      } catch (error) {
+        console.log("CAUGHT ERROR", error);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <main className="content">
@@ -15,7 +34,7 @@ function Main(props) {
           <div className="profile__box-avatar">
             <img
               className="profile__avatar"
-              src={hourglass}
+              src={`${userAvatar}`}
               alt="Profile Avatar"
             />
             <Button name="edit-avatar" handleClick={props.onEditAvatarClick}>
@@ -28,12 +47,8 @@ function Main(props) {
           </div>
 
           <div className="profile__info">
-            <h1 className="profile__value-type-name">
-              <GiSandsOfTime />
-            </h1>
-            <p className="profile__value-type-profession">
-              <GiSandsOfTime />
-            </p>
+            <h1 className="profile__value-type-name">{`${userName}`}</h1>
+            <p className="profile__value-type-profession">{`${userDescription}`}</p>
             <Button name="edit-profile" handleClick={props.onEditProfileClick}>
               <img
                 className="profile__edit-icon"
