@@ -1,8 +1,7 @@
 import React from "react";
 import api from "../utils/Api";
+import Card from "./Card";
 
-//import { GiSandsOfTime } from "react-icons/gi";
-//import hourglass from "../images/hourglass.png";
 import pencil from "../images/pencil.png";
 import editButton from "../images/edit-button.png";
 import Button from "./Button";
@@ -21,6 +20,26 @@ function Main(props) {
         setUserAvatar(userData.avatar);
         setUserName(userData.name);
         setUserDescription(userData.about);
+      } catch (error) {
+        console.log("CAUGHT ERROR", error);
+      }
+    })();
+  }, []);
+
+  const [cards, setCards] = React.useState([]);
+
+  React.useEffect(() => {
+    (async function () {
+      try {
+        const cardsData = await api.getInitialCards();
+        setCards(
+          cardsData.map((card) => ({
+            id: card._id,
+            name: card.name,
+            link: card.link,
+            likesAmount: card.likes.length,
+          }))
+        );
       } catch (error) {
         console.log("CAUGHT ERROR", error);
       }
@@ -64,7 +83,16 @@ function Main(props) {
         </section>
 
         <section className="cards">
-          <ul className="cards__list"></ul>
+          <ul className="cards__list">
+            {cards.map((card) => (
+              <Card
+                key={card.id}
+                name={card.name}
+                link={card.link}
+                likesAmount={card.likesAmount}
+              />
+            ))}
+          </ul>
         </section>
       </main>
     </>
