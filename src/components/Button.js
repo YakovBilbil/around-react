@@ -1,11 +1,11 @@
-function Button(props) {
+function Button({ name, handleClick, children }) {
   return (
     <button
       type="button"
-      className={`profile__${props.name}-button`}
-      onClick={props.handleClick}
+      className={`profile__${name}-button`}
+      onClick={handleClick}
     >
-      {props.children}
+      {children}
     </button>
   );
 }

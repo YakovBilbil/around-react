@@ -1,11 +1,11 @@
 import closeIcon from "../images/close-icon.svg";
 
-function ImagePopup(props) {
+function ImagePopup({ isCardPopupOpen, card, onClose }) {
   return (
     <>
       <div
         className={`popup popup_card-image ${
-          props.selectedCard.isCardClicked ? "popup_opened" : ""
+          isCardPopupOpen && "popup_opened"
         }`}
       >
         <div className="popup__form popup__image">
@@ -18,15 +18,15 @@ function ImagePopup(props) {
               className="popup__close-icon"
               src={closeIcon}
               alt="Close Icon"
-              onClick={props.onClose}
+              onClick={onClose}
             />
           </button>
           <img
             className="popup__image-photo"
-            src={`${props.selectedCard.cardData.link}`}
-            alt={`A Card named ${props.selectedCard.cardData.name}`}
+            src={`${card.link}`}
+            alt={`A Card named ${card.name}`}
           />
-          <p className="popup__image-title">{`${props.selectedCard.cardData.name}`}</p>
+          <p className="popup__image-title">{`${card.name}`}</p>
         </div>
       </div>
     </>

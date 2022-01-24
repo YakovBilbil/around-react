@@ -1,4 +1,4 @@
-import header from "../images/header.svg";
+import headerImage from "../images/headerImage.svg";
 
 function Header() {
   return (
@@ -6,7 +6,7 @@ function Header() {
       <header className="header">
         <img
           className="header__logo"
-          src={header}
+          src={headerImage}
           alt="Title: Around the U.S."
         />
       </header>
