@@ -19,7 +19,7 @@ class Api {
     }
   }
 
-  async getUserData() {
+  async getUserInfo() {
     const response = await fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: { authorization: this._token },
@@ -105,27 +105,9 @@ class Api {
     }
   }
 
-  async handleLikePut(cardId) {
+  async changeLikeCardStatus(cardId, isLiked) {
     const response = await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: "PUT",
-      headers: {
-        authorization: this._token,
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(
-        `something get wrong. Status: ${response.status}, ${response.statusText}`
-      );
-    }
-  }
-
-  async handleLikeDelete(cardId) {
-    const response = await fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      method: "DELETE",
+      method: isLiked ? "DELETE" : "PUT",
       headers: {
         authorization: this._token,
         "Content-Type": "application/json",
