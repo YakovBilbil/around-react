@@ -71,7 +71,7 @@ class Api {
     }
   }
 
-  async editProfile(name, about) {
+  async editProfile({ name, about }) {
     const response = await fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {

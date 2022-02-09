@@ -63,6 +63,29 @@ function App() {
     setCard(card);
   }
 
+  const handleUpdateUser = ({ name, about }) => {
+    (async function () {
+      try {
+        const updatedUserInfo = await api.editProfile({ name, about });
+        setCurrentUser(updatedUserInfo);
+        closeAllPopups();
+      } catch (error) {
+        console.log("CAUGHT ERROR", error);
+      }
+    })();
+  };
+
+  /*
+  async function handleUpdateUser() {
+    try {
+      const updatedUserInfo = await api.editProfile();
+      setCurrentUser(updatedUserInfo);
+      closeAllPopups();
+    } catch (error) {
+      console.log("CAUGHT ERROR", error);
+    }
+  }
+*/
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -102,6 +125,7 @@ function App() {
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
             onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
           />
 
           <PopupWithForm
