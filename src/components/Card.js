@@ -14,15 +14,13 @@ function Card({ card, onCardClick, onCardLike, onTrashClick, onCardDelete }) {
     isLiked ? "card__heart_active" : ""
   }`;
 
-  // const cardOnDome = document.querySelector(".card");
-
   return (
     <>
       <li className="card">
         <button
           type="button"
           className={cardDeleteButtonClassName}
-          onClick={() => onTrashClick(card)} //onCardDelete(card)}
+          onClick={() => onTrashClick(card)}
         />
         <img
           className="card__picture"
