@@ -1,52 +1,23 @@
-import React, { useState, useEffect } from "react";
-//import { Routes, Route, BrowserRouter } from "react-router-dom";
-import api from "../utils/Api";
+import React, { useContext } from "react";
+
 import Card from "./Card";
 import CurrentUserContext from "../contexts/CurrentUserContext";
+import Button from "./Button";
 
 import pencilImage from "../images/pencilImage.png";
 import editButton from "../images/edit-button.png";
-import Button from "./Button";
 
 function Main({
   onEditAvatarClick,
   onCardClick,
   onEditProfileClick,
   onAddPlaceClick,
+  cards,
+  onCardLike,
+  onCardDelete,
+  onTrashClick,
 }) {
-  const currentUser = React.useContext(CurrentUserContext);
-
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    (async function () {
-      try {
-        const cardsData = await api.getInitialCards();
-        setCards(cardsData);
-      } catch (error) {
-        console.log("CAUGHT ERROR", error);
-      }
-    })();
-  }, []);
-
-  async function handleCardLike(card) {
-    try {
-      const isLiked = card.likes.some((i) => i._id === currentUser._id);
-      const newCard = await api.changeLikeCardStatus(card._id, isLiked);
-      setCards((cards) => cards.map((c) => (c._id === card._id ? newCard : c)));
-    } catch (error) {
-      console.log("CAUGHT ERROR", error);
-    }
-  }
-
-  async function handleCardDelete(card) {
-    try {
-      await api.deleteCard(card._id);
-      setCards((cards) => cards.filter((c) => c.id !== card._id));
-    } catch (error) {
-      console.log("CAUGHT ERROR", error);
-    }
-  } //we have to check this function next after we will be able to create card
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <>
@@ -91,8 +62,9 @@ function Main({
                 key={card._id}
                 card={card}
                 onCardClick={onCardClick}
-                onCardLike={handleCardLike}
-                onCardDelete={handleCardDelete}
+                onCardLike={onCardLike}
+                onTrashClick={onTrashClick}
+                onCardDelete={onCardDelete}
               />
             ))}
           </ul>
