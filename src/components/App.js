@@ -94,7 +94,7 @@ function App() {
   async function handleCardDelete(card) {
     try {
       await api.deleteCard(card._id);
-      setCards((cards) => cards.filter((c) => c.id !== card._id));
+      setCards((cards) => cards.filter((c) => c._id !== card._id));
       closeAllPopups();
     } catch (error) {
       console.log("CAUGHT ERROR", error);
