@@ -1,4 +1,4 @@
-import closeIcon from "../images/close-icon.svg";
+import Popup from "./Popup";
 
 function PopupWithForm({
   name,
@@ -10,13 +10,12 @@ function PopupWithForm({
   onSubmit,
 }) {
   return (
-    <div className={`popup popup_${name} ${isOpen && "popup_opened"}`}>
+    <Popup isOpen={isOpen} name={name} onClose={onClose}>
       <div className="popup__form">
         <form
           className="popup__form-submit"
           name={`popup_${name}`}
           onSubmit={onSubmit}
-          noValidate
         >
           <h2 className="popup__form-title">{`${title}`}</h2>
 
@@ -25,21 +24,9 @@ function PopupWithForm({
           <button type="submit" className="popup__form-save-button">
             {`${submitButtonText}`}
           </button>
-          <button
-            type="button"
-            className="popup__form-close-button"
-            aria-label="Close"
-            onClick={onClose}
-          >
-            <img
-              className="popup__close-icon"
-              src={closeIcon}
-              alt="Close Icon"
-            />
-          </button>
         </form>
       </div>
-    </div>
+    </Popup>
   );
 }
 

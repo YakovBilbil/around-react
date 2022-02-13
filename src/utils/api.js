@@ -4,12 +4,7 @@ class Api {
     this._token = token;
   }
 
-  async getInitialCards() {
-    const response = await fetch(`${this._baseUrl}/cards`, {
-      method: "GET",
-      headers: { authorization: this._token },
-    });
-
+  _checkResponse(response) {
     if (response.ok) {
       return response.json();
     } else {
@@ -19,19 +14,22 @@ class Api {
     }
   }
 
+  async getInitialCards() {
+    const response = await fetch(`${this._baseUrl}/cards`, {
+      method: "GET",
+      headers: { authorization: this._token },
+    });
+
+    return this._checkResponse(response);
+  }
+
   async getUserInfo() {
     const response = await fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
       headers: { authorization: this._token },
     });
 
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(
-        `something get wrong. Status: ${response.status}, ${response.statusText}`
-      );
-    }
+    return this._checkResponse(response);
   }
 
   async addCard(name, link) {
@@ -44,13 +42,7 @@ class Api {
       body: JSON.stringify({ name: name, link: link }),
     });
 
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(
-        `something get wrong. Status: ${response.status}, ${response.statusText}`
-      );
-    }
+    return this._checkResponse(response);
   }
 
   async deleteCard(cardId) {
@@ -62,13 +54,7 @@ class Api {
       },
     });
 
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(
-        `something get wrong. Status: ${response.status}, ${response.statusText}`
-      );
-    }
+    return this._checkResponse(response);
   }
 
   async editProfile({ name, about }) {
@@ -81,13 +67,7 @@ class Api {
       body: JSON.stringify({ name: name, about: about }),
     });
 
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(
-        `something get wrong. Status: ${response.status}, ${response.statusText}`
-      );
-    }
+    return this._checkResponse(response);
   }
 
   async getCardLikesData(cardId) {
@@ -96,13 +76,7 @@ class Api {
       headers: { authorization: this._token },
     });
 
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(
-        `something get wrong. Status: ${response.status}, ${response.statusText}`
-      );
-    }
+    return this._checkResponse(response);
   }
 
   async changeLikeCardStatus(cardId, isLiked) {
@@ -114,13 +88,7 @@ class Api {
       },
     });
 
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(
-        `something get wrong. Status: ${response.status}, ${response.statusText}`
-      );
-    }
+    return this._checkResponse(response);
   }
 
   async changeProfilePicture(avatar) {
@@ -133,13 +101,7 @@ class Api {
       body: JSON.stringify({ avatar: avatar }),
     });
 
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error(
-        `something get wrong. Status: ${response.status}, ${response.statusText}`
-      );
-    }
+    return this._checkResponse(response);
   }
 }
 

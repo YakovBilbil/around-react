@@ -1,10 +1,10 @@
 function Footer() {
   return (
-    <>
-      <footer className="footer">
-        <p className="footer__title">&copy; 2021 Yakov Bilbil</p>
-      </footer>
-    </>
+    <footer className="footer">
+      <p className="footer__title">
+        &copy; {new Date().getFullYear()} Yakov Bilbil
+      </p>
+    </footer>
   );
 }
 

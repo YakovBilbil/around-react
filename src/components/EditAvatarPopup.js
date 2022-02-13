@@ -35,6 +35,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
         id="avatar-url-input"
         placeholder="Profile picture link"
         className="popup__form-input popup__form-input_type_image-link"
+        value={avatar || ""}
         onChange={handleAvatarChange}
         required
       />

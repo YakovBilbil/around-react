@@ -84,27 +84,27 @@ function App() {
     }
   }
 
-  const [card, setCard] = useState({});
-
+  const [cardForDelete, setCardForDelete] = useState({});
   const [isVerifyDeletePopupOpen, setIsVerifyDeletePopupOpen] = useState(false);
-  function handleTrashClick(card) {
+  function handleTrashClick(cardForDelete) {
     setIsVerifyDeletePopupOpen(true);
-    setCard(card);
+    setCardForDelete(cardForDelete);
   }
-  async function handleCardDelete(card) {
+  async function handleCardDelete(cardForDelete) {
     try {
-      await api.deleteCard(card._id);
-      setCards((cards) => cards.filter((c) => c._id !== card._id));
+      await api.deleteCard(cardForDelete._id);
+      setCards((cards) => cards.filter((c) => c._id !== cardForDelete._id));
       closeAllPopups();
     } catch (error) {
       console.log("CAUGHT ERROR", error);
     }
   }
 
+  const [cardForImagePopup, setCardForImagePopup] = useState({});
   const [isCardPopupOpen, setIsCardPopupOpen] = useState(false);
-  function handleCardClick(card) {
+  function handleCardClick(cardForImagePopup) {
     setIsCardPopupOpen(true);
-    setCard(card);
+    setCardForImagePopup(cardForImagePopup);
   }
 
   async function handleCardLike(card) {
@@ -123,61 +123,61 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setIsCardPopupOpen(false);
     setIsVerifyDeletePopupOpen(false);
-    setCard({});
+    setCardForDelete({});
+    setCardForImagePopup({});
   }
 
   return (
-    <>
-      <CurrentUserContext.Provider value={currentUser}>
-        <div className="page">
-          <div className="container">
-            <Header />
-            <Main
-              onEditAvatarClick={handleEditAvatarClick}
-              onEditProfileClick={handleEditProfileClick}
-              onAddPlaceClick={handleAddPlaceClick}
-              onCardClick={handleCardClick}
-              cards={cards}
-              onCardLike={handleCardLike}
-              onTrashClick={handleTrashClick}
-              onCardDelete={handleCardDelete}
-            />
-            <Footer />
-          </div>
-
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar}
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <div className="container">
+          <Header />
+          <Main
+            onEditAvatarClick={handleEditAvatarClick}
+            onEditProfileClick={handleEditProfileClick}
+            onAddPlaceClick={handleAddPlaceClick}
+            onCardClick={handleCardClick}
+            cards={cards}
+            onCardLike={handleCardLike}
+            onTrashClick={handleTrashClick}
+            onCardDelete={handleCardDelete}
           />
-
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            onUpdateUser={handleUpdateUser}
-          />
-
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            onAddPlaceSubmit={handleAddPlaceSubmit}
-          />
-
-          <VerifyDeletePopup
-            isOpen={isVerifyDeletePopupOpen}
-            card={card}
-            onClose={closeAllPopups}
-            onConfirmDeleteClick={handleCardDelete}
-          />
-
-          <ImagePopup
-            isCardPopupOpen={isCardPopupOpen}
-            card={card}
-            onClose={closeAllPopups}
-          />
+          <Footer />
         </div>
-      </CurrentUserContext.Provider>
-    </>
+
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
+
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          onUpdateUser={handleUpdateUser}
+        />
+
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          onAddPlaceSubmit={handleAddPlaceSubmit}
+        />
+
+        <VerifyDeletePopup
+          isOpen={isVerifyDeletePopupOpen}
+          cardForDelete={cardForDelete}
+          onClose={closeAllPopups}
+          onConfirmDeleteClick={handleCardDelete}
+        />
+
+        <ImagePopup
+          popupName={"card-image"}
+          isCardPopupOpen={isCardPopupOpen}
+          cardForImagePopup={cardForImagePopup}
+          onClose={closeAllPopups}
+        />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
